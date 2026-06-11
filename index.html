@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StatLab - Browser Statistical Analysis Suite</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <h1>📊 StatLab</h1>
+
+        <nav>
+
+            <button class="menu-btn active"
+                data-target="dashboard">
+                Dashboard
+            </button>
+
+            <button class="menu-btn"
+                data-target="basic">
+                Basic Statistics
+            </button>
+
+            <button class="menu-btn"
+                data-target="ttest">
+                T-Test
+            </button>
+
+            <button class="menu-btn"
+                data-target="anova">
+                ANOVA
+            </button>
+
+            <button class="menu-btn"
+                data-target="regression">
+                Regression
+            </button>
+
+            <button class="menu-btn"
+                data-target="distribution">
+                Distributions
+            </button>
+
+            <button class="menu-btn"
+                data-target="csv">
+                CSV Analysis
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="content">
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="panel active">
+
+            <h2>StatLab Dashboard</h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <h3>Basic Statistics</h3>
+                    <p>
+                        Mean, Variance, SD,
+                        Skewness, Kurtosis
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>T-Test</h3>
+                    <p>
+                        One Sample /
+                        Paired /
+                        Independent
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>ANOVA</h3>
+                    <p>
+                        One Way Analysis
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Regression</h3>
+                    <p>
+                        Linear Regression
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Distributions</h3>
+                    <p>
+                        Normal, t,
+                        ChiSquare,
+                        F,
+                        Poisson,
+                        Binomial
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>CSV Analysis</h3>
+                    <p>
+                        Upload CSV and Analyze
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Basic Statistics -->
+        <section id="basic" class="panel">
+
+            <h2>Basic Statistics</h2>
+
+            <textarea id="basicData"
+                placeholder="1,2,3,4,5"></textarea>
+
+            <button id="basicCalcBtn">
+                Calculate
+            </button>
+
+            <div id="basicResult"></div>
+
+        </section>
+
+        <!-- T Test -->
+        <section id="ttest" class="panel">
+
+            <h2>T-Test</h2>
+
+            <label>Group A</label>
+
+            <textarea id="groupA"></textarea>
+
+            <label>Group B</label>
+
+            <textarea id="groupB"></textarea>
+
+            <button id="ttestBtn">
+                Run T-Test
+            </button>
+
+            <div id="ttestResult"></div>
+
+        </section>
+
+        <!-- ANOVA -->
+        <section id="anova" class="panel">
+
+            <h2>One Way ANOVA</h2>
+
+            <p>
+                Group data separated by line breaks
+            </p>
+
+            <textarea id="anovaData"
+                rows="10"></textarea>
+
+            <button id="anovaBtn">
+                Run ANOVA
+            </button>
+
+            <div id="anovaResult"></div>
+
+        </section>
+
+        <!-- Regression -->
+        <section id="regression" class="panel">
+
+            <h2>Linear Regression</h2>
+
+            <label>X values</label>
+
+            <textarea id="xValues"></textarea>
+
+            <label>Y values</label>
+
+            <textarea id="yValues"></textarea>
+
+            <button id="regressionBtn">
+                Run Regression
+            </button>
+
+            <div id="regressionResult"></div>
+
+            <div id="regressionChart"></div>
+
+        </section>
+
+        <!-- Distribution -->
+        <section id="distribution" class="panel">
+
+            <h2>Distribution Visualizer</h2>
+
+            <select id="distType">
+
+                <option value="normal">
+                    Normal
+                </option>
+
+                <option value="t">
+                    T Distribution
+                </option>
+
+                <option value="chisquare">
+                    Chi Square
+                </option>
+
+                <option value="f">
+                    F Distribution
+                </option>
+
+                <option value="poisson">
+                    Poisson
+                </option>
+
+                <option value="binomial">
+                    Binomial
+                </option>
+
+            </select>
+
+            <input
+                id="param1"
+                placeholder="Parameter 1">
+
+            <input
+                id="param2"
+                placeholder="Parameter 2">
+
+            <button id="plotDistBtn">
+                Plot Distribution
+            </button>
+
+            <div id="distChart"></div>
+
+        </section>
+
+        <!-- CSV -->
+        <section id="csv" class="panel">
+
+            <h2>CSV Analysis</h2>
+
+            <input
+                type="file"
+                id="csvFile">
+
+            <div id="csvResult"></div>
+
+            <div id="csvChart"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/stats.js"></script>
+<script src="js/tests.js"></script>
+<script src="js/distributions.js"></script>
+<script src="js/regression.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
